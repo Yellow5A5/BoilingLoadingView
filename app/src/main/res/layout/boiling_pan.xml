@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="258dp"
+    android:layout_height="258dp"
+    android:background="@drawable/circle"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/img_pan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/pan" />
+
+    <ImageView
+        android:id="@+id/img_water"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/img_pan"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/water_bg" />
+
+    <ImageView
+        android:id="@+id/img_cover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/img_pan"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="2dp"
+        android:src="@drawable/cover" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shadow"
+        android:layout_alignTop="@id/img_pan"
+        android:layout_alignLeft="@id/img_pan"/>
+
+</RelativeLayout>

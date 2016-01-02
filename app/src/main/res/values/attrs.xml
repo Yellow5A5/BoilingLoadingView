@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WaterView">
+        <attr name="WaterView_src" format="reference"/>
+        <attr name="WaterView_speed" format="integer"/>
+    </declare-styleable>
+
+
+
+</resources>
