@@ -25,7 +25,7 @@ public class BoilingPanView extends RelativeLayout {
     private View mView;
     private Context mContext;
 
-    private ImageView mWaterView;
+    private WaterView mWaterView;
     private ImageView mPanView;
     private ImageView mCoverView;
     private ClipDrawable mWaterDrawable;
@@ -33,7 +33,7 @@ public class BoilingPanView extends RelativeLayout {
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what == 0X0000){
-                mWaterDrawable.setLevel(mWaterDrawable.getLevel() + 300);
+                mWaterDrawable.setLevel(mWaterDrawable.getLevel() + 800);
             }
             return false;
         }
@@ -55,7 +55,7 @@ public class BoilingPanView extends RelativeLayout {
     }
 
     private void initView() {
-        mWaterView = (ImageView) mView.findViewById(R.id.img_water);
+        mWaterView = (WaterView) mView.findViewById(R.id.img_water);
         mPanView = (ImageView) mView.findViewById(R.id.img_pan);
         mCoverView = (ImageView) mView.findViewById(R.id.img_cover);
 
@@ -63,7 +63,7 @@ public class BoilingPanView extends RelativeLayout {
     }
 
 
-    public void beginAnimai(){
+    public void beginAnim(){
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -74,5 +74,10 @@ public class BoilingPanView extends RelativeLayout {
                 }
             }
         },0,50);
+    }
+
+    public void resetAnim(){
+        mWaterDrawable.setLevel(0);
+        mWaterView.resetBubbleAnim();
     }
 }

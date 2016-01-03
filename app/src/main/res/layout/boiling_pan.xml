@@ -12,7 +12,7 @@
         android:layout_centerInParent="true"
         android:src="@drawable/pan" />
 
-    <ImageView
+    <yellow5a5.demo.boilingloadingview.View.WaterView
         android:id="@+id/img_water"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
