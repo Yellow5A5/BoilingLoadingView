@@ -1,13 +1,10 @@
 package yellow5a5.demo.boilingloadingview.View;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
@@ -69,13 +66,9 @@ public class WaterView extends ImageView {
         mBubbleList = new ArrayList<Bubble>();
     }
 
-    @Override
-    public void setImageBitmap(Bitmap bm) {
-        super.setImageBitmap(bm);
-    }
-
     private void setDrawable(Drawable drawable) {
         mDrawable = drawable;
+        setImageDrawable(mDrawable);
     }
 
     @Override
@@ -126,11 +119,11 @@ public class WaterView extends ImageView {
             if (bubble.getCenterY() < mHeight - mHeight * mDrawable.getLevel() / 10000f) {
                 mBubbleList.remove(bubble);
                 addBubble(0);
-            }else{
+            } else {
                 bubble.beenLargen();
                 bubble.beenRise();
             }
-            canvas.drawCircle(bubble.getCenterX(),bubble.getCenterY(),bubble.getRadius(),mPaint);
+            canvas.drawCircle(bubble.getCenterX(), bubble.getCenterY(), bubble.getRadius(), mPaint);
         }
         invalidate();
     }
@@ -140,10 +133,5 @@ public class WaterView extends ImageView {
         getHandler().removeCallbacksAndMessages(null);
         isSetAnim = false;
         mBubbleList.clear();
-    }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }

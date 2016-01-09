@@ -5,6 +5,8 @@
         <attr name="WaterView_speed" format="integer"/>
     </declare-styleable>
 
-
+    <declare-styleable name="FlameView">
+        <attr name="FlameView_flameNum" format="integer"/>
+    </declare-styleable>
 
 </resources>
