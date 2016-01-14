@@ -2,23 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="200dp"
-    android:layout_height="200dp">
-
-    <ImageView
-        android:id="@+id/img_cover"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:paddingBottom="2dp"
-        android:src="@drawable/cover" />
+    android:layout_height="200dp"
+    android:layout_centerInParent="true"
+    android:background="@drawable/layout_bg">
 
     <ImageView
         android:id="@+id/img_pan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/img_cover"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:src="@drawable/pan" />
+
+    <ImageView
+        android:id="@+id/img_cover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/img_pan"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="2dp"
+        android:src="@drawable/cover"
+        android:visibility="gone"/>
 
     <yellow5a5.demo.boilingloadingview.View.FlameView
         android:id="@+id/flame"
@@ -37,7 +40,38 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
         android:paddingLeft="30dp"
-        android:src="@drawable/carrot" />
+        android:src="@drawable/carrot"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/img_potato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/img_carrot"
+        android:layout_centerHorizontal="true"
+        android:paddingRight="80dp"
+        android:src="@drawable/potato"
+        android:visibility="gone"/>
+
+    <View
+        android:id="@+id/img_pea1"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_alignBottom="@id/img_carrot"
+        android:layout_alignLeft="@id/img_carrot"
+        android:layout_marginLeft="25dp"
+        android:background="@drawable/pea"
+        android:visibility="gone"/>
+
+    <View
+        android:id="@+id/img_pea2"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_alignBottom="@id/img_carrot"
+        android:layout_alignLeft="@id/img_pea1"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/pea"
+        android:visibility="gone"/>
 
     <yellow5a5.demo.boilingloadingview.View.WaterView
         android:id="@+id/img_water"
@@ -45,33 +79,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/img_carrot"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/water_bg" />
+        android:src="@drawable/water_bg"/>
 
-    <ImageView
-        android:id="@+id/img_potato"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/img_water"
-        android:layout_centerHorizontal="true"
-        android:paddingRight="80dp"
-        android:src="@drawable/potato" />
 
-    <View
-        android:id="@+id/img_pea1"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
-        android:layout_alignBottom="@id/img_water"
-        android:layout_alignLeft="@id/img_water"
-        android:layout_marginLeft="40dp"
-        android:background="@drawable/pea" />
-
-    <View
-        android:id="@+id/img_pea2"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
-        android:layout_alignBottom="@id/img_water"
-        android:layout_alignRight="@id/img_water"
-        android:layout_marginRight="40dp"
-        android:background="@drawable/pea" />
 
 </RelativeLayout>

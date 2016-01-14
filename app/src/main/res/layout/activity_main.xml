@@ -1,29 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="yellow5a5.demo.boilingloadingview.MainActivity">
 
-    <yellow5a5.demo.boilingloadingview.View.BoilingPanView
-        android:id="@+id/loading_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
     <Button
-        android:id="@+id/button1"
-        android:text="动画播放"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_width="wrap_content"
+        android:id="@+id/first_demo"
+        android:text="Loading style."
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
-        android:id="@+id/button2"
-        android:text="动画重置"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/button1"
-        android:layout_width="wrap_content"
+        android:id="@+id/second_demo"
+        android:text="pull refresh style."
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-</RelativeLayout>
+</LinearLayout>

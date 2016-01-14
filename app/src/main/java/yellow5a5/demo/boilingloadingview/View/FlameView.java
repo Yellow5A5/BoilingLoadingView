@@ -67,7 +67,7 @@ public class FlameView extends View {
         mAnimPare = 0;
         isFirstAnim = true;
         mLayerAnim.end();
-        this.setVisibility(View.GONE);
+        this.setVisibility(View.INVISIBLE);
     }
 
     private void initData() {

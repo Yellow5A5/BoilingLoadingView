@@ -7,6 +7,7 @@ import android.graphics.drawable.ClipDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -43,6 +44,17 @@ public class BoilingPanView extends RelativeLayout {
     private boolean isRightRotate = true;
     private ValueAnimator mCoverAnim;
 
+    private BoilingAnimListener mBoilingAnimListener;
+
+    public interface BoilingAnimListener{
+        //初始动画结束监听
+        void onFirstAnimEnd();
+    }
+
+    public void setBoilingAnimListener(BoilingAnimListener l){
+        this.mBoilingAnimListener = l;
+    }
+
     private Handler mHandle = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -73,8 +85,8 @@ public class BoilingPanView extends RelativeLayout {
         mWaterView = (WaterView) mView.findViewById(R.id.img_water);
         mFlameView = (FlameView) mView.findViewById(R.id.flame);
         mCoverView = (ImageView) mView.findViewById(R.id.img_cover);
-        mPea1 = (View) mView.findViewById(R.id.img_pea1);
-        mPea2 = (View) mView.findViewById(R.id.img_pea2);
+        mPea1 = mView.findViewById(R.id.img_pea1);
+        mPea2 = mView.findViewById(R.id.img_pea2);
         mPotato = (ImageView) mView.findViewById(R.id.img_potato);
         mCarrot = (ImageView) mView.findViewById(R.id.img_carrot);
         mWaterDrawable = (ClipDrawable) mWaterView.getDrawable();
@@ -83,15 +95,11 @@ public class BoilingPanView extends RelativeLayout {
     private void initStartAnim() {
         mLeftInAnim = AnimationUtils.loadAnimation(getContext(), R.anim.left_in_anim);
         mRightInAnim = AnimationUtils.loadAnimation(getContext(), R.anim.right_in_anim);
-//        mCoverAnim = AnimationUtils.loadAnimation(getContext(), R.anim.cover_anim);
-
-        mPea1.startAnimation(mLeftInAnim);
-        mPea2.startAnimation(mLeftInAnim);
-        mPotato.startAnimation(mLeftInAnim);
-        mCarrot.startAnimation(mRightInAnim);
-        mCoverView.startAnimation(mRightInAnim);
     }
 
+    /*
+    抖动的盖子
+     */
     private void initCoverAnim() {
         mCoverAnim = ValueAnimator.ofFloat(0f, 1f, 0f).setDuration(800);
         mCoverAnim.setRepeatMode(Animation.REVERSE);
@@ -105,7 +113,7 @@ public class BoilingPanView extends RelativeLayout {
                 } else {
                     mCoverView.setRotation(-value * 5);
                 }
-                mCoverView.setTranslationY(-value * 10);
+                mCoverView.setTranslationY(-value * TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,5,getResources().getDisplayMetrics()));
             }
         });
         mCoverAnim.addListener(new Animator.AnimatorListener() {
@@ -131,8 +139,44 @@ public class BoilingPanView extends RelativeLayout {
         });
     }
 
+    /*
+    开始启动的动画
+     */
+    public void beginFirstInAnim(){
+        mPea1.setVisibility(VISIBLE);
+        mPea2.setVisibility(VISIBLE);
+        mPotato.setVisibility(VISIBLE);
+        mCarrot.setVisibility(VISIBLE);
+        mCoverView.setVisibility(VISIBLE);
+        mPea1.startAnimation(mLeftInAnim);
+        mPea2.startAnimation(mLeftInAnim);
+        mPotato.startAnimation(mLeftInAnim);
+        mCarrot.startAnimation(mRightInAnim);
+        mCoverView.startAnimation(mRightInAnim);
+        mRightInAnim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
 
-    public void beginAnim() {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                if (mBoilingAnimListener != null) {
+                    mBoilingAnimListener.onFirstAnimEnd();
+                }
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+    }
+
+    /*
+    开始加水燃火动画
+     */
+    public void beginBoilingAnim() {
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -147,9 +191,18 @@ public class BoilingPanView extends RelativeLayout {
         mCoverAnim.start();
     }
 
+    /*
+    重置动画
+     */
     public void resetAnim() {
         mWaterDrawable.setLevel(0);
         mWaterView.resetBubbleAnim();
         mFlameView.stopFlaming();
+        mPea1.setVisibility(INVISIBLE);
+        mPea2.setVisibility(INVISIBLE);
+        mPotato.setVisibility(INVISIBLE);
+        mCarrot.setVisibility(INVISIBLE);
+        mCoverView.setVisibility(INVISIBLE);
+
     }
 }
