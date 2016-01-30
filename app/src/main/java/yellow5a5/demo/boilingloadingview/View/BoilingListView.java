@@ -3,15 +3,11 @@ package yellow5a5.demo.boilingloadingview.View;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-
-import yellow5a5.demo.boilingloadingview.R;
 
 /**
  * Created by Weiwu on 16/1/10.
@@ -41,14 +37,12 @@ public class BoilingListView extends ListView implements AbsListView.OnScrollLis
 
     private void initView(Context context) {
         mHeadView = new BoilingPanView(context);
-//        measureView(mHeadView);
+        measureView(mHeadView);
         mHeadHeight = mHeadView.getMeasuredHeight();
         setTopPadding(-mHeadHeight);
         mHeadView.invalidate();
         this.addHeaderView(mHeadView, null, false);
         this.setOnScrollListener(this);
-
-//        mHeadView.setLayoutParams(new L);
     }
 
     //此方法可以参考ListView的measureItem源码。
@@ -69,19 +63,20 @@ public class BoilingListView extends ListView implements AbsListView.OnScrollLis
     }
 
     private void setTopPadding(int topPadding) {
-        setPadding(0, topPadding, 0, 0);
+        mHeadView.setPadding(0, topPadding, 0, 0);
+        mHeadView.setScaleX(topPadding / (float) mHeadHeight + 1);
+        mHeadView.setScaleY(topPadding / (float) mHeadHeight + 1);
     }
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         this.mScrollState = scrollState;
-//        Log.e("statechange","sssss11111111");
     }
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        this.mFirstVisibleItem = firstVisibleItem;//TODO 遇到的问题，设置了HeaderView导致firstVisibleItem出问题。因为firstVisibleItem还是按原理的margin变化。
-        Log.e("mFirstVisibleItem:"," "+ mFirstVisibleItem);
+        this.mFirstVisibleItem = firstVisibleItem;
+        Log.e("mFirstVisibleItem:", " " + mFirstVisibleItem);
     }
 
     private int startY;
@@ -94,27 +89,27 @@ public class BoilingListView extends ListView implements AbsListView.OnScrollLis
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-//        switch (ev.getAction()) {
-//            case MotionEvent.ACTION_DOWN:
-//                if (mFirstVisibleItem == 0) {
-//                    isTouchFirstFlag = true;
-//                    startY = (int) ev.getY();
-//                }
-//                break;
-//            case MotionEvent.ACTION_MOVE:
-//                onMove(ev);
-//                break;
-//            case MotionEvent.ACTION_UP:
-//                if (state == IN_MAX) {
-//                    state = IN_LOADING;
-//                    setTopPadding(0);
-//                    //刷新
-//                } else if (state == IN_PULL) {
-//                    state = IN_NORMAL;
-//                    isTouchFirstFlag = false;
-//                    setTopPadding(-mHeadHeight);
-//                }
-//        }
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                if (mFirstVisibleItem == 0) {
+                    isTouchFirstFlag = true;
+                    startY = (int) ev.getY();
+                }
+                break;
+            case MotionEvent.ACTION_MOVE:
+                onMove(ev);
+                break;
+            case MotionEvent.ACTION_UP:
+                if (state == IN_MAX) {
+                    state = IN_LOADING;
+                    setTopPadding(0);
+                    //刷新
+                } else if (state == IN_PULL) {
+                    state = IN_NORMAL;
+                    isTouchFirstFlag = false;
+                    setTopPadding(-mHeadHeight);
+                }
+        }
 
         return super.onTouchEvent(ev);
     }
@@ -139,23 +134,23 @@ public class BoilingListView extends ListView implements AbsListView.OnScrollLis
                 break;
             case IN_PULL:
                 setTopPadding(topPadding);
-//                if (space > mHeadHeight
-//                        && mScrollState == SCROLL_STATE_TOUCH_SCROLL) {
-//                    state = IN_MAX;
-////                    reflashViewByState();
-//                }
+                if (space > mHeadHeight
+                        && mScrollState == SCROLL_STATE_TOUCH_SCROLL) {
+                    state = IN_MAX;
+//                    reflashViewByState();
+                }
                 break;
             case IN_MAX:
-//                setTopPadding(topPadding);
-//                if (space < mHeadHeight ) {
-//                    state = IN_PULL;
-////                    reflashViewByState();
-//                } else if (space <= 0) {
-//                    state = IN_LOADING;
-//                    isTouchFirstFlag = false;
-////                    reflashViewByState();
-//                }
-//                break;
+                setTopPadding(topPadding);
+                if (space < mHeadHeight) {
+                    state = IN_PULL;
+//                    reflashViewByState();
+                } else if (space <= 0) {
+                    state = IN_LOADING;
+                    isTouchFirstFlag = false;
+//                    reflashViewByState();
+                }
+                break;
         }
     }
 }

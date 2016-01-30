@@ -138,7 +138,7 @@ public class FlameView extends View {
         //颜色变化
         mPaint.setShader(new LinearGradient(mSumWidth / 2, mSumHeight, mSumWidth / 2, 0, Color.YELLOW, Color.RED, Shader.TileMode.REPEAT));
         canvas.drawPath(mPath, mPaint);
-        //原本想绘制三层火焰颜色，发现效果不好，以下：
+        //原本想用贝赛尔去绘制三层火焰颜色，发现效果不好，以下：
 //        for (int layer = 3; layer > 0; layer--) {
 //            for (int i = 1; i <= mFlameNum; i++) {
 //                mPath.quadTo(mSingleWidth * i - mSingleWidth / 2, mFlameSingleHeight * (layer), mSingleWidth * i, mSumHeight);
