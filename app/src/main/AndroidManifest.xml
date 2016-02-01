@@ -17,8 +17,6 @@
         </activity>
         <activity android:name=".LoadingDemo">
         </activity>
-        <activity android:name=".PullRefreshDemo">
-        </activity>
     </application>
 
 </manifest>

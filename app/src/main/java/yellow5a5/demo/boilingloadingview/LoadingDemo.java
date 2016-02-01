@@ -11,7 +11,7 @@ public class LoadingDemo extends Activity {
 
     private Button buttonInit;
     private Button button1;
-    private Button button2;
+    private Button resetBtn;
     private BoilingPanView mBoilingPanView;
 
     @Override
@@ -24,17 +24,10 @@ public class LoadingDemo extends Activity {
     }
 
     private void initView() {
-        buttonInit = (Button) findViewById(R.id.init_button);
-        button1 = (Button) findViewById(R.id.button1);
-        button2 = (Button) findViewById(R.id.button2);
+        buttonInit = (Button) findViewById(R.id.btn_init);
+        resetBtn = (Button) findViewById(R.id.btn_reset);
 
         mBoilingPanView = (BoilingPanView) findViewById(R.id.loading_view);
-        mBoilingPanView.setBoilingAnimListener(new BoilingPanView.BoilingAnimListener() {
-            @Override
-            public void onFirstAnimEnd() {
-                mBoilingPanView.beginBoilingAnim();
-            }
-        });
     }
 
     private void initListener() {
@@ -45,13 +38,7 @@ public class LoadingDemo extends Activity {
             }
         });
 
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mBoilingPanView.beginBoilingAnim();
-            }
-        });
-        button2.setOnClickListener(new View.OnClickListener() {
+        resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mBoilingPanView.resetAnim();

@@ -1,6 +1,7 @@
 package yellow5a5.demo.boilingloadingview.View;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -90,22 +91,10 @@ public class FlameView extends View {
                 invalidate();
             }
         });
-        mLayerAnim.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
+        mLayerAnim.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationRepeat(Animator animation) {
+                super.onAnimationRepeat(animation);
                 if (isFirstAnim) {
                     isFirstAnim = false;
                 }

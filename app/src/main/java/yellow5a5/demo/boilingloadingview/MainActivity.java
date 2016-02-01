@@ -28,8 +28,9 @@ public class MainActivity extends Activity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,PullRefreshDemo.class);
-                startActivity(intent);
+                BoilingDialog.Builder builder = new BoilingDialog.Builder(MainActivity.this);
+                final BoilingDialog dialog = builder.build();
+                dialog.show();
             }
         });
     }

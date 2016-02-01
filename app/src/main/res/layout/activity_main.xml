@@ -9,12 +9,12 @@
 
     <Button
         android:id="@+id/first_demo"
-        android:text="Loading style."
+        android:text="Demo show(updating)."
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
         android:id="@+id/second_demo"
-        android:text="pull refresh style."
+        android:text="Dialog show."
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

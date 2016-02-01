@@ -1,6 +1,7 @@
 package yellow5a5.demo.boilingloadingview.View;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.drawable.ClipDrawable;
@@ -46,12 +47,12 @@ public class BoilingPanView extends RelativeLayout {
 
     private BoilingAnimListener mBoilingAnimListener;
 
-    public interface BoilingAnimListener{
+    public interface BoilingAnimListener {
         //初始动画结束监听
         void onFirstAnimEnd();
     }
 
-    public void setBoilingAnimListener(BoilingAnimListener l){
+    public void setBoilingAnimListener(BoilingAnimListener l) {
         this.mBoilingAnimListener = l;
     }
 
@@ -113,27 +114,13 @@ public class BoilingPanView extends RelativeLayout {
                 } else {
                     mCoverView.setRotation(-value * 5);
                 }
-                mCoverView.setTranslationY(-value * TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,5,getResources().getDisplayMetrics()));
+                mCoverView.setTranslationY(-value * TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()));
             }
         });
-        mCoverAnim.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
+        mCoverAnim.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationRepeat(Animator animation) {
+                super.onAnimationRepeat(animation);
                 isRightRotate = !isRightRotate;
             }
         });
@@ -142,7 +129,7 @@ public class BoilingPanView extends RelativeLayout {
     /*
     开始启动的动画
      */
-    public void beginFirstInAnim(){
+    public void beginFirstInAnim() {
         mPea1.setVisibility(VISIBLE);
         mPea2.setVisibility(VISIBLE);
         mPotato.setVisibility(VISIBLE);
@@ -162,7 +149,10 @@ public class BoilingPanView extends RelativeLayout {
             @Override
             public void onAnimationEnd(Animation animation) {
                 if (mBoilingAnimListener != null) {
+                    //这里是为了给外部留有操作的空间
                     mBoilingAnimListener.onFirstAnimEnd();
+                } else {
+                    beginBoilingAnim();
                 }
             }
 

@@ -14,7 +14,7 @@
         android:layout_centerInParent="true"/>
 
     <Button
-        android:id="@+id/init_button"
+        android:id="@+id/btn_init"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -22,18 +22,10 @@
         android:text="初始化" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btn_reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/init_button"
-        android:text="动画播放" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/button1"
+        android:layout_toRightOf="@id/btn_init"
         android:text="动画重置" />
 </RelativeLayout>
